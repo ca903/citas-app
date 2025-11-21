@@ -1,4 +1,4 @@
-// server.js
+// server.js (CÓDIGO OPTIMIZADO PARA RAILWAY Y EJS)
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -12,35 +12,31 @@ const app = express();
 // Puerto dinámico para Railway
 const PORT = process.env.PORT || 3000;
 
-// Configuración del motor de plantillas EJS
+// --------------------------------------------------
+// 1. CONFIGURACIÓN DEL MOTOR DE VISTAS (EJS) Y MIDDLEWARE
+// --------------------------------------------------
 app.set("view engine", "ejs");
-app.set("views", path.join(process.cwd(), "views")); // Esto ahora funciona!
-app.get("/", (req, res) => {
-  res.render("index", { quote: null }); // Busca index.ejs en la carpeta views
-});
+// Usar process.cwd() para la ruta absoluta y confiable
+app.set("views", path.join(process.cwd(), "views"));
 
-// Middleware para servir archivos estáticos (CSS y JS)
-app.use(express.static(path.join(__dirname, "public")));
+// Middleware para procesar JSON (para rutas POST)
 app.use(express.json());
 
 // --------------------------------------------------
-// CONEXIÓN A LA BASE DE DATOS
+// 2. CONEXIÓN A LA BASE DE DATOS (DEBE IR ANTES DE LAS RUTAS API)
 // --------------------------------------------------
-// CRITERIO: Posee una Base de Datos Funcional
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("✅ MongoDB Conectado"))
   .catch((err) => console.error("❌ Error de conexión DB:", err));
 
 // --------------------------------------------------
-// RUTAS DINÁMICAS
+// 3. RUTAS API (LÓGICA DINÁMICA)
 // --------------------------------------------------
-
-// Ruta API para obtener una cita aleatoria (Dinámica)
-// CRITERIO: Aplicación Web Dinámica
+// Estas deben ir antes de la ruta estática y la ruta raíz
 app.get("/api/quote", async (req, res) => {
   try {
-    // Lógica para obtener una cita aleatoria
+    // Consulta simplificada
     const count = await Quote.countDocuments();
     if (count === 0) {
       return res.json({ text: "No hay citas disponibles.", author: "Sistema" });
@@ -49,19 +45,8 @@ app.get("/api/quote", async (req, res) => {
     const quote = await Quote.findOne().skip(random);
     res.json(quote);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Fallo al obtener la cita." });
+    console.error("Error al obtener cita dinámica:", error);
+    // Devolvemos un error 500 legible para el frontend
+    res.status(500).json({ error: "Fallo al obtener la cita del servidor." });
   }
-});
-
-// Ruta Principal (Raíz) - Renderiza la interfaz
-app.get("/", (req, res) => {
-  res.render("index", { quote: null });
-});
-
-// --------------------------------------------------
-// INICIO DEL SERVIDOR
-// --------------------------------------------------
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
 });
