@@ -14,7 +14,10 @@ const PORT = process.env.PORT || 3000;
 
 // Configuración del motor de plantillas EJS
 app.set("view engine", "ejs");
-app.set("views", path.join(process.cwd(), "views"));
+app.set("views", path.join(process.cwd(), "views")); // Esto ahora funciona!
+app.get("/", (req, res) => {
+  res.render("index", { quote: null }); // Busca index.ejs en la carpeta views
+});
 
 // Middleware para servir archivos estáticos (CSS y JS)
 app.use(express.static(path.join(__dirname, "public")));
