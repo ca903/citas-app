@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Generador de Citas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Citas Inspiradoras</h1>
+        
+        <div id="quote-box" class="quote-box">
+            <p class="quote-text">Presiona el botón para generar una cita.</p>
+            <p class="quote-author">— Autor Desconocido</p>
+        </div>
+
+        <button id="generate-btn">Generar Cita</button>
+
+        <hr>
+
+        <div class="external-links">
+            <h3>Medios Digitales y Servicios en la Nube</h3>
+            <p>
+                <a href="https://www.youtube.com/results?search_query=citas+filosoficas" target="_blank" class="service-link">
+                    🎥 Ver videos relacionados en YouTube
+                </a>
+            </p>
+            <p>
+                <a href="https://drive.google.com/drive/u/0/my-drive" target="_blank" class="service-link">
+                    ☁️ Ir a Google Drive
+                </a>
+            </p>
+            <p>
+                <a href="https://github.com/tu-usuario/nombre-del-repo" target="_blank" class="service-link">
+                    </> Ver Código Fuente en GitHub
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const quoteTextElement = document.querySelector('.quote-text');
+        const quoteAuthorElement = document.querySelector('.quote-author');
+        const generateBtn = document.getElementById('generate-btn');
+
+        async function fetchNewQuote() {
+            try {
+                const response = await fetch('/api/quote');
+                const data = await response.json();
+                
+                if (data.text) {
+                    quoteTextElement.textContent = data.text;
+                    quoteAuthorElement.textContent = '— ' + data.author;
+                } else {
+                    quoteTextElement.textContent = 'No hay citas disponibles en la DB.';
+                    quoteAuthorElement.textContent = '— Sistema';
+                }
+            } catch(error) {
+                quoteTextElement.textContent = 'Error al conectar con la API.';
+                quoteAuthorElement.textContent = '— Error';
+            }
+        }
+
+        generateBtn.addEventListener('click', fetchNewQuote);
+
+        // Carga una cita al iniciar la página
+        document.addEventListener('DOMContentLoaded', fetchNewQuote);
+    </script>
+</body>
+</html>
