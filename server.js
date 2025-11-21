@@ -52,7 +52,8 @@ app.get("/api/quote", async (req, res) => {
 // --------------------------------------------------
 // 4. SERVIR ARCHIVOS ESTÁTICOS (SOLUCIÓN PARA CSS)
 // --------------------------------------------------
-// 🛑 CORRECCIÓN DE CSS: Servir todo el directorio raíz, donde está style.css
+// 🛑 SOLUCIÓN FINAL: Servir todo el directorio raíz, donde está style.css
+// Usamos __dirname, que apunta a la carpeta citas app/
 app.use(express.static(__dirname));
 
 // --------------------------------------------------
