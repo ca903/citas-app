@@ -36,7 +36,6 @@ mongoose
 // Estas deben ir antes de la ruta estática y la ruta raíz
 app.get("/api/quote", async (req, res) => {
   try {
-    // Consulta simplificada
     const count = await Quote.countDocuments();
     if (count === 0) {
       return res.json({ text: "No hay citas disponibles.", author: "Sistema" });
@@ -46,7 +45,27 @@ app.get("/api/quote", async (req, res) => {
     res.json(quote);
   } catch (error) {
     console.error("Error al obtener cita dinámica:", error);
-    // Devolvemos un error 500 legible para el frontend
     res.status(500).json({ error: "Fallo al obtener la cita del servidor." });
   }
+});
+
+// --------------------------------------------------
+// 4. SERVIR ARCHIVOS ESTÁTICOS (SOLUCIÓN PARA CSS)
+// --------------------------------------------------
+// 🛑 CORRECCIÓN DE CSS: Servir todo el directorio raíz, donde está style.css
+app.use(express.static(__dirname));
+
+// --------------------------------------------------
+// 5. RUTA RAÍZ (DEBE SER LA ÚLTIMA RUTA DEFINIDA ANTES DE app.listen)
+// --------------------------------------------------
+app.get("/", (req, res) => {
+  // Si la ruta estática funciona, el CSS se cargará.
+  res.render("index", { quote: null });
+});
+
+// --------------------------------------------------
+// 6. INICIO DEL SERVIDOR
+// --------------------------------------------------
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
 });
