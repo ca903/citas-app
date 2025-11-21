@@ -2,86 +2,136 @@
 body {
   font-family: "Arial", sans-serif;
   margin: 0;
-  background-color: #f0f4f8;
+  /* Fondo con un degradado suave */
+  background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  color: #333;
+  line-height: 1.6;
 }
 
 .container {
-  width: 90%; /* CRITERIO: Adaptación inicial a móvil (90% del ancho) */
-  padding: 20px;
-  background: white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  width: 90%;
+  padding: 30px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Sombra elegante */
+  border-radius: 15px;
   text-align: center;
+  max-width: 700px;
+  transition: all 0.3s ease;
 }
 
+h1 {
+  color: #007bff;
+  margin-bottom: 25px;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+/* --- CAJA DE LA CITA --- */
 .quote-box {
   margin: 30px 0;
-  padding: 25px;
-  background-color: #e6f0ff;
-  border-left: 5px solid #007bff;
-  min-height: 120px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border-left: 6px solid #007bff; /* Tira de color distintiva */
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .quote-text {
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-style: italic;
-  margin: 0 0 10px 0;
+  margin: 0 0 15px 0;
+  color: #444;
 }
 
 .quote-author {
-  font-size: 1em;
-  font-weight: bold;
-  color: #555;
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #666;
+  text-align: right;
+  padding-right: 20px;
 }
 
+/* --- BOTÓN --- */
 #generate-btn {
-  padding: 12px 25px;
-  background-color: #007bff;
+  padding: 12px 30px;
+  background: linear-gradient(
+    90deg,
+    #007bff 0%,
+    #0056b3 100%
+  ); /* Degradado de botón */
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s;
+  font-size: 1.1em;
+  font-weight: 700;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 #generate-btn:hover {
-  background-color: #0056b3;
+  transform: translateY(-2px); /* Efecto 3D al pasar el ratón */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* CRITERIO: RESPONSIVIDAD - Media Query para pantallas grandes (Escritorio/Tablet) */
-@media (min-width: 768px) {
-  .container {
-    width: 700px; /* Ancho fijo para pantallas grandes */
-    padding: 50px;
-  }
-  .quote-text {
-    font-size: 1.5em; /* Aumenta el tamaño de la fuente */
-  }
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0)
+  );
+  margin: 40px 0;
 }
 
-.external-links {
-  margin-top: 40px;
-  border-top: 1px solid #ddd;
-  padding-top: 20px;
+/* --- ENLACES EXTERNOS --- */
+.external-links h3 {
+  color: #495057;
+  margin-bottom: 15px;
+  font-size: 1.2em;
 }
 
 .service-link {
-  display: inline-block; /* Se muestran en línea, pero usamos margen */
-  margin: 0 10px;
+  display: inline-block;
+  margin: 5px 15px;
+  padding: 8px 0;
   text-decoration: none;
-  color: #333;
+  color: #007bff;
   font-weight: 500;
   transition: color 0.3s;
+  border-bottom: 2px solid transparent;
 }
 
 .service-link:hover {
-  color: #007bff;
+  color: #0056b3;
+  border-bottom: 2px solid #007bff;
+}
+
+/* CRITERIO: RESPONSIVIDAD (Asegura la adaptación al móvil) */
+@media (max-width: 768px) {
+  .container {
+    width: 95%; /* Más espacio en móvil */
+    padding: 20px;
+    margin: 15px auto;
+  }
+  .quote-text {
+    font-size: 1.1em;
+  }
+  .service-link {
+    display: block; /* Enlaces uno debajo del otro en móvil */
+    margin: 10px auto;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
 }
