@@ -15,7 +15,7 @@ app.set("views", path.join(process.cwd(), "views"));
 app.use(express.json());
 
 // Añade esta línea crucial para el diagnóstico
-const dbUrl = process.env.MONGODB_URI;
+const dbUrl = process.env.MONGO_URL;
 console.log(`🔎 URL de Conexión Intentada: ${dbUrl}`);
 
 mongoose
