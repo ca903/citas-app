@@ -14,24 +14,22 @@ app.set("views", path.join(process.cwd(), "views"));
 
 app.use(express.json());
 
-// Añade estas opciones críticas para la estabilidad en Railway
+// Añade esta línea crucial para el diagnóstico
+const dbUrl = process.env.MONGODB_URI;
+console.log(`🔎 URL de Conexión Intentada: ${dbUrl}`);
+
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    // Estas son esenciales para usar los drivers modernos:
+  .connect(dbUrl, {
+    // Usa dbUrl
     useNewUrlParser: true,
     useUnifiedTopology: true,
-
-    // ⬇️ CLAVE: Reducir el tiempo de espera
     serverSelectionTimeoutMS: 5000,
-
-    // ⬇️ Opcional, pero ayuda a veces en entornos proxy/contenedores
     family: 4,
   })
   .then(() => console.log("✅ Conexión estable con MongoDB"))
   .catch((err) => {
     console.error("❌ Fallo en la conexión a la BD:", err.message);
   });
-
 app.get("/api/quote", async (req, res) => {
   try {
     const count = await Quote.countDocuments();
