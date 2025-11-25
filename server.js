@@ -14,13 +14,13 @@ app.set("views", path.join(process.cwd(), "views"));
 
 app.use(express.json());
 
-// Añade esta línea crucial para el diagnóstico
+// 🛠️ SOLUCIÓN: Usar la variable MONGO_URL que Railway inyecta
 const dbUrl = process.env.MONGO_URL;
-console.log(`🔎 URL de Conexión Intentada: ${dbUrl}`);
+console.log(`🔎 URL de Conexión Intentada: ${dbUrl}`); // Para diagnóstico en Railway
 
 mongoose
   .connect(dbUrl, {
-    // Usa dbUrl
+    // Opciones para estabilidad en contenedores y reducir timeout a 5s
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000,
@@ -30,6 +30,7 @@ mongoose
   .catch((err) => {
     console.error("❌ Fallo en la conexión a la BD:", err.message);
   });
+
 app.get("/api/quote", async (req, res) => {
   try {
     const count = await Quote.countDocuments();
