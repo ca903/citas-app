@@ -15,9 +15,18 @@ app.set("views", path.join(process.cwd(), "views"));
 app.use(express.json());
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000,
+    family: 4,
+  })
   .then(() => console.log("✅ MongoDB Conectado"))
-  .catch((err) => console.error("❌ Error de conexión DB:", err));
+  .catch((err) => {
+    console.error("❌ Error de conexión DB:", err.message);
+    // Añadir el log de la URL para diagnóstico final
+    console.error("URL de Conexión Usada:", process.env.MONGODB_URI);
+  });
 
 app.get("/api/quote", async (req, res) => {
   try {
