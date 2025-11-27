@@ -36,6 +36,14 @@
                     </> Ver Código Fuente en GitHub
                 </a>
             </p>
+
+            <!-- 🎯 NUEVA SECCIÓN DE ADMINISTRACIÓN (CRUD) -->
+            <hr>
+            <h3>Administración y Base de Datos (CRUD)</h3>
+            <a href="/admin" class="service-link" style="font-weight: 700; color: #dc3545;">
+                ⚙️ ADMINISTRAR CITAS
+            </a>
+            <!-- FIN DE LA NUEVA SECCIÓN -->
         </div>
     </div>
 
@@ -66,7 +74,7 @@
         } catch(error) {
             console.error('Error al obtener la cita:', error);
             quoteTextElement.textContent = 'Error: Fallo al comunicarse con el servidor.';
-            quoteAuthorElement.textContent = '— Verifica los Logs de Railway';
+            quoteAuthorElement.textContent = '— Verifica los Logs de Render/Railway';
         }
     }
 
@@ -80,3 +88,5 @@
     // Carga una cita al iniciar la página
     document.addEventListener('DOMContentLoaded', fetchNewQuote);
 </script>
+</body>
+</html>

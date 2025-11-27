@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+      .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #444;
+      }
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 1em;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+      }
+      .form-actions {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .btn-submit {
+        padding: 12px 30px;
+        background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.1em;
+        font-weight: 700;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .btn-submit:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .service-link {
+        text-decoration: none;
+        color: #6c757d;
+        font-weight: 500;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><%= title %></h1>
+
+      <!-- La acción cambia si es Crear (/admin/new) o Editar (/admin/edit/:id) -->
+      <form action="<%= action %>" method="POST">
+        <div class="form-group">
+          <label for="text">Texto de la Cita:</label>
+          <!-- Pre-carga el valor de la cita si se está editando -->
+          <textarea id="text" name="text" rows="4" required>
+<%= quote.text %></textarea
+          >
+        </div>
+        <div class="form-group">
+          <label for="author">Autor de la Cita:</label>
+          <!-- Pre-carga el valor del autor si se está editando -->
+          <input
+            type="text"
+            id="author"
+            name="author"
+            value="<%= quote.author %>"
+            required
+          />
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-submit">Guardar Registro</button>
+          <a href="/admin" class="service-link">Cancelar y Volver</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
