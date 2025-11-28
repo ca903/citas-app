@@ -137,12 +137,10 @@
             </td>
             <td><%= quote.author %></td>
             <td class="admin-actions">
-              <!-- Botón Editar (Update) -->
               <a href="/admin/edit/<%= quote._id %>" class="btn-edit">
                 Editar
               </a>
 
-              <!-- Formulario para Eliminar (Delete) -->
               <form
                 action="/admin/delete/<%= quote._id %>"
                 method="POST"

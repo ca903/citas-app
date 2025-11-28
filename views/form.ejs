@@ -65,18 +65,15 @@
     <div class="container">
       <h1><%= title %></h1>
 
-      <!-- La acción cambia si es Crear (/admin/new) o Editar (/admin/edit/:id) -->
       <form action="<%= action %>" method="POST">
         <div class="form-group">
           <label for="text">Texto de la Cita:</label>
-          <!-- Pre-carga el valor de la cita si se está editando -->
           <textarea id="text" name="text" rows="4" required>
 <%= quote.text %></textarea
           >
         </div>
         <div class="form-group">
           <label for="author">Autor de la Cita:</label>
-          <!-- Pre-carga el valor del autor si se está editando -->
           <input
             type="text"
             id="author"

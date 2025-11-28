@@ -117,10 +117,9 @@ hr {
   border-bottom: 2px solid #007bff;
 }
 
-/* CRITERIO: RESPONSIVIDAD (Asegura la adaptación al móvil) */
 @media (max-width: 768px) {
   .container {
-    width: 95%; /* Más espacio en móvil */
+    width: 95%;
     padding: 20px;
     margin: 15px auto;
   }
@@ -128,7 +127,7 @@ hr {
     font-size: 1.1em;
   }
   .service-link {
-    display: block; /* Enlaces uno debajo del otro en móvil */
+    display: block;
     margin: 10px auto;
   }
   h1 {

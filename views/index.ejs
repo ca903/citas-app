@@ -43,7 +43,6 @@
             <a href="/admin" class="service-link" style="font-weight: 700; color: #dc3545;">
                 ⚙️ ADMINISTRAR CITAS
             </a>
-            <!-- FIN DE LA NUEVA SECCIÓN -->
         </div>
     </div>
 
@@ -54,11 +53,9 @@
 
     async function fetchNewQuote() {
         try {
-            // Llama a la ruta API que creaste en server.js
             const response = await fetch('/api/quote'); 
 
             if (!response.ok) {
-                // Si la respuesta no es 200 (ej. 404 o 500), lanzamos un error
                 throw new Error(`Error HTTP: ${response.status}`);
             }
 
@@ -77,8 +74,6 @@
             quoteAuthorElement.textContent = '— Verifica los Logs de Render/Railway';
         }
     }
-
-    // CRUCIAL: Agregar el Event Listener
     if (generateBtn) {
         generateBtn.addEventListener('click', fetchNewQuote);
     } else {
